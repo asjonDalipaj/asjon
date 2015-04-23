@@ -11,12 +11,6 @@ downloadAgenda = (day, cb) ->
     unless b
       cbCalled = yes
       cb []
-  console.log Nightmare
-  ###
-  .exists('a[href="?d='+day+'"]',dayHasEvents)
-  .click('a[href="/agenda/"]').wait()
-  .click('a[href="?d='+day+'"]').wait()
-  ###
   n = new Nightmare()
     .goto('https://galilei-cr-sito.registroelettronico.com/login/')
     .type('#username',process.env.REGISTRO_USERNAME)
@@ -32,7 +26,7 @@ downloadAgenda = (day, cb) ->
       rowExtractor = ->
         if $('td',this).get(1)?
           $($('td',this).get(1)).text().trim()
-        else ""
+        else "(niente)"
       $ = cheerio.load htmlData
       tab = $('.result_table tr').map(rowExtractor).get()
       tab.splice 0, 2
