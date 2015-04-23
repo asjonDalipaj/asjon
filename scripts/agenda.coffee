@@ -33,7 +33,7 @@ downloadAgenda = (day, cb) ->
       cb tab
 
 cosaCePerIl = (day,res) ->
-  res.send 'aspetta che guardo l\'agenda per il '+day
+  res.send 'aspetta che guardo l\'agenda per il '+day+' (potrei metterci fino a 3 minuti)'
   downloadAgenda day, (data) ->
     if data.length is 0
       res.send "non c'è niente per doma :)"
