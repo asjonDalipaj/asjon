@@ -36,10 +36,11 @@ cosaCePerIl = (day,res) ->
   res.send 'aspetta che guardo l\'agenda per il '+day+' (potrei metterci fino a 3 minuti)'
   downloadAgenda day, (data) ->
     if data.length is 0
-      res.send "non c'è niente per doma :)"
+      res.send "non c'è niente segnato sull'agenda per il "+day
     else
       res.send "ecco cosa c'è per doma: "+data.join('; ')
-
 module.exports = (robot) ->
   robot.hear "cosa c'è per domani?", (res) ->
     cosaCePerIl moment().add(1, 'days').format('YYYY-MM-DD'), res
+  robot.hear /cosa c'è per il (\d+-\d+-\d+)/i, (res) ->
+    cosaCePerIl res.match[1], res
