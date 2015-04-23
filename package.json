@@ -5,6 +5,7 @@
   "author": "Enrico Fasoli <fazius2009@gmail.com>",
   "description": "Il miglior amico della 5IA",
   "dependencies": {
+    "cheerio": "^0.19.0",
     "hubot": "^2.12.0",
     "hubot-bitcoin": "^1.0.3",
     "hubot-diagnostics": "0.0.1",
@@ -18,7 +19,10 @@
     "hubot-rules": "^0.1.0",
     "hubot-scripts": "^2.5.16",
     "hubot-shipit": "^0.2.0",
-    "hubot-youtube": "^0.1.2"
+    "hubot-youtube": "^0.1.2",
+    "moment": "^2.10.2",
+    "nightmare": "^1.8.0",
+    "weak": "^0.4.0"
   },
   "engines": {
     "node": "0.10.x"
