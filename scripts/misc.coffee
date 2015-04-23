@@ -14,6 +14,8 @@ module.exports = (robot) ->
   robot.respond /grazie/i, grazie
   robot.respond /ringraziamenti/i, (res) ->
     res.send 'voi teneroni mi avete ringraziato ' + (robot.brain.get('ringraziato') or 0) + ' volte :)'
+  robot.respond /saluta (\w+)/i, (res) ->
+    res.send 'ciao ' + res.match[1]
   robot.respond /dove sei/i, (res) ->
     robot.http('http://canihazip.com/s')
       .get() (err, r, body) ->

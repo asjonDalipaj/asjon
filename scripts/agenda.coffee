@@ -40,7 +40,7 @@ cosaCePerIl = (day,res) ->
     else
       res.send "ecco cosa c'è per doma: "+data.join('; ')
 module.exports = (robot) ->
-  robot.hear "cosa c'è per domani?", (res) ->
+  robot.hear /cosa c'è per domani?/i, (res) ->
     cosaCePerIl moment().add(1, 'days').format('YYYY-MM-DD'), res
   robot.hear /cosa c'è per il (\d+-\d+-\d+)/i, (res) ->
     cosaCePerIl res.match[1], res
