@@ -9,7 +9,7 @@ module.exports = (robot) ->
   robot.respond /ringraziamenti/i, (res) ->
     res.send 'voi teneroni mi avete ringraziato ' + (robot.brain.get('ringraziato') or 0) + ' volte :)'
   # Richiami
-  robot.respond /sei (?:proprio )?(.+)/i, (res) ->
+  robot.respond /sei (?:(?:proprio|davvero|veramente) )?(.+)/i, (res) ->
     nomi = robot.brain.get('nomi') or {}
     nomi[res.match[1]] ?= 0
     nomi[res.match[1]] += 1
