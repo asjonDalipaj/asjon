@@ -38,4 +38,8 @@ module.exports = (robot) ->
       res.send 'sto parlando in '+res.message.room+', '+res.message.user.name
   robot.respond /ti amo/i, (res) ->
     res.send 'anche io ti amo '+(res.message.user.name+' ' or '')+'<3'
+  robot.hear /(?:ehi|ciao|(?:bella(?: li)?)) (?:asjon|assa|assion(?:i|e))(?:!)?/, (res) ->
+    console.log res.match
+    saluti = ['ciao', 'bella', 'è arrivato', 'eccolooo', 'dimmi']
+    res.send res.random(saluti)+' '+res.message.user.name+'!'
   robot.respond /secret-kill-code/i, (res) -> process.exit 0
