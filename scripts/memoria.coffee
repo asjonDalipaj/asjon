@@ -33,8 +33,9 @@ module.exports = (robot) ->
     else if res.match[3] and res.match[1] then query = res.match[1]
     # Estrazione argomento della query
     arg = (res.match[3] or res.match[2] or res.match[1]).toLowerCase()
-    # Controllo data
-    if moment(arg,'YYYY-MM-DD').isValid() and (query is 'quand' or query is 'cos')
+    # Controllo se l'argomento è data
+    argIsDate = arg.trim().match(/^(?:il )?\d{4}-\d{1,2}-\d{1,2}$/i) and moment(arg,'YYYY-MM-DD').isValid()
+    if argIsDate and (query is 'quand' or query is 'cos')
       # chiesto una data
       data = moment(arg,'[il] YYYY-MM-DD')
       res.send arg+' è '+data.format('dddd Do MMMM YYYY')+' ovvero '+data.fromNow()
@@ -45,7 +46,8 @@ module.exports = (robot) ->
       if mem[arg]
         # controllo se è salvata una data nell'argomento chiesto
         data = moment(mem[arg],'[il] YYYY-MM-DD')
-        if data.isValid()
+        contentIsDate = mem[arg].trim().match(/^(?:il )?\d{4}-\d{1,2}-\d{1,2}$/i) and data.isValid()
+        if contentIsDate
           # nella memoria era salvata una data
           res.send arg+' è '+data.format('dddd Do MMMM YYYY')+' ovvero '+data.fromNow()
         else res.send arg+' '+verbo+' '+mem[arg]
