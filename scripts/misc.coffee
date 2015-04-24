@@ -25,6 +25,8 @@ module.exports = (robot) ->
       res.send 'sto parlando con te, '+res.message.user.name
     else
       res.send 'sto parlando in '+res.message.room+', '+res.message.user.name
+  robot.respond /ti amo/i, (res) ->
+    res.send 'anche io ti amo '+res.message.user.name+' <3'
   robot.respond /riavvia/i, (res) ->
     robot.send 'riavvio...'
     process.exit 0
