@@ -4,7 +4,7 @@ moment.locale 'it'
 module.exports = (robot) ->
   robot.respond /ricorda(?:ti)? (?:che )?(.+) ([=è]|sono) (.+)/i, (res) ->
     mem = robot.brain.get('memoria') or {}
-    name = res.match[1].toLowerCase(); definition = res.match[3]
+    name = res.match[1].toLowerCase().replace('?',''); definition = res.match[3].replace('?','')
     r = if res.match[2] is 'sono' then 'fossero' else 'fosse'
     if mem[name]?
       res.send 'pensavo che '+name+' '+r+' '+mem[name]+'. Mi ricorderò che invece è '+definition
@@ -18,7 +18,7 @@ module.exports = (robot) ->
     m = res.match[1].toLowerCase()
     nonso = ['non so cosa sia','BZBZ 404-NOT-FOUND','non mi fa ne caldo ne freddo','se sapessi cos\'è magari']
     if mem[m]?
-      res.send 'cancellazione neuronale in corso...'
+      res.send 'in caso cambi idea, sappi che ricordavo "'+mem[m]+'" riguardo a '+m
       delete mem[m]
       robot.brain.set 'memoria', mem # necessary?
     else res.send res.random nonso
@@ -26,13 +26,14 @@ module.exports = (robot) ->
   robot.respond /memory-dump/i, (res) ->
     res.send JSON.stringify robot.brain.get('memoria')
 
-  robot.respond /(?:che )?(?:(?:(?:(?:(cos|qual|quand)\'è)|(?:chi (sono|è)?)))|(?:quali|cosa) sono) ([\w- ]+)(?:\?)?/i, (res) ->
+  robot.respond /(?:che )?(?:(?:(?:(?:(cos|qual|quand)\'è)|(?:chi (sono|è)?)))|(?:quali|cosa) sono) ([^?]+)(?:\?)?/i, (res) ->
     query = undefined
     # Estrazione query (quand,cos,qual,chi...)
     if res.match[2] then query = res.match[2] or res.match[1]
     else if res.match[3] and res.match[1] then query = res.match[1]
+    if query? then query = query.replace '?', ''
     # Estrazione argomento della query
-    arg = (res.match[3] or res.match[2] or res.match[1]).toLowerCase()
+    arg = (res.match[3] or res.match[2] or res.match[1]).toLowerCase().replace('?','')
     # Controllo se l'argomento è data
     argIsDate = arg.trim().match(/^(?:il )?\d{4}-\d{1,2}-\d{1,2}$/i) and moment(arg,'YYYY-MM-DD').isValid()
     if argIsDate and (query is 'quand' or query is 'cos')
