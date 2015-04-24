@@ -23,6 +23,9 @@ module.exports = (robot) ->
       robot.brain.set 'memoria', mem # necessary?
     else res.send res.random nonso
 
+  robot.respond /memory-dump/i, (res) ->
+    res.send JSON.stringify robot.brain.get('memoria')
+
   robot.respond /(?:che )?(?:(?:(?:(?:(cos|qual|quand)\'è)|(?:chi (sono|è)?)))|(?:quali|cosa) sono) ([\w- ]+)(?:\?)?/i, (res) ->
     query = undefined
     # Estrazione query (quand,cos,qual,chi...)
