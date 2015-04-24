@@ -54,7 +54,7 @@ parseCircolari = (err,data,callback) ->
     parseHtml data, (err,res) ->
       #console.log("Done!")
       circolari = res
-      fs.writeFile 'circolari/circolari.json', JSON.stringify circolari
+      fs.writeFile 'circolari.json', JSON.stringify circolari
       callback circolari
 
 module.exports = (robot) ->
@@ -62,7 +62,7 @@ module.exports = (robot) ->
     res.send 'controllo circolari...'
     fs.exists 'circolari/circolari.json', (jsonExists) ->
       if jsonExists
-        circolari = JSON.parse fs.readFileSync('circolari/circolari.json').toString()
+        circolari = JSON.parse fs.readFileSync('circolari.json').toString()
         res.send JSON.stringify circolari.slice 0,5
       else
         fs.exists 'circolari.html', (htmlExists) ->

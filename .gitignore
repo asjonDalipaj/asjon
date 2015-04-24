@@ -2,7 +2,7 @@ node_modules
 hubot.lua
 .DS_Store*
 .hubot_history
-circolari/
+circolari.json
 run.sh
 run_telegram.sh
 *.pub
