@@ -1,7 +1,8 @@
 module.exports = (robot) ->
+  ringr = ['prego :)', "non c'è di che", "faccio solo il mio lavoro", "no problemo amigo", "non fate complimenti ;)"]
   grazie = (res) ->
     robot.brain.set 'ringraziato', (robot.brain.get('ringraziato') or 0) + 1
-    res.send res.random ['prego :)', "non c'è di che"]
+    res.send res.random ringr
   robot.hear /sniper/i, (res) ->
     res.send 'sniper???? sniper non morire'
   robot.hear /trogu/i, (res) ->
@@ -10,7 +11,7 @@ module.exports = (robot) ->
     res.send 'ricordatevi che se mi chiamate chiedendo cosa c\'è per domani posso guardare io sull\'agenda!'
   robot.respond /spaca botilia/i, (res) ->
     res.send 'AMAZO FAMILIA'
-  robot.hear /grazie asjon/i, grazie
+  robot.hear /(?:grazie|bravo) (?:asjon|assa)/i, grazie
   robot.respond /grazie/i, grazie
   robot.respond /ringraziamenti/i, (res) ->
     res.send 'voi teneroni mi avete ringraziato ' + (robot.brain.get('ringraziato') or 0) + ' volte :)'
