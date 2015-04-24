@@ -25,8 +25,9 @@ module.exports = (robot) ->
     if mem[arg]
       res.send arg+' '+verbo+' '+mem[arg]
     else res.send 'boh'
-  robot.respond /memoria/i, (res) ->
-    m = JSON.stringify robot.brain.get 'memoria'
-    if m isnt 'null'
-      res.send m
+  robot.respond /memoria|a cosa stai pensando(?:\?)?/i, (res) ->
+    m = robot.brain.get 'memoria'
+    if m isnt null
+      r = ['ho studiato', 'ho imparato', 'ho appreso', 'sono venuto a conoscenza di']
+      res.send 'nel corso della mia vita '+res.random(r)+' '+(i for i of m).join(', ')
     else res.send 'non so niente...'

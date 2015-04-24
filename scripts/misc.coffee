@@ -11,7 +11,7 @@ module.exports = (robot) ->
     res.send 'ricordatevi che se mi chiamate chiedendo cosa c\'è per domani posso guardare io sull\'agenda!'
   robot.respond /spaca botilia/i, (res) ->
     res.send 'AMAZO FAMILIA'
-  robot.hear /(?:grazie|bravo) (?:asjon|assa)/i, grazie
+  robot.hear /(?:grazie|bravo) (?:asjon|assa|assioni)/i, grazie
   robot.respond /grazie/i, grazie
   robot.respond /ringraziamenti/i, (res) ->
     res.send 'voi teneroni mi avete ringraziato ' + (robot.brain.get('ringraziato') or 0) + ' volte :)'
