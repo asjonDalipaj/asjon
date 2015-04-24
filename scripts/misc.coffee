@@ -20,3 +20,6 @@ module.exports = (robot) ->
     robot.http('http://canihazip.com/s')
       .get() (err, r, body) ->
         res.send 'dovrei essere a ' + body
+  robot.respond /riavvia/i, (res) ->
+    robot.send 'riavvio...'
+    process.exit 0
