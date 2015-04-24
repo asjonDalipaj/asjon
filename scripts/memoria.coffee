@@ -8,6 +8,13 @@ module.exports = (robot) ->
       res.send 'non sapevo che '+name+' fosse '+definition+'. Me lo ricorderò'
     mem[name] = definition
     robot.brain.set 'memoria', mem
+  robot.respond /dimentica(?:ti)? (.+)/i, (res) ->
+    mem = robot.brain.get('memoria') or {}
+    if mem[res.match[1]]?
+      res.send 'cancellazione neuronale in corso...'
+      delete mem[res.match[1]]
+      robot.brain.set 'memoria', mem # necessary?
+    else res.send 'non so cosa sia'
   robot.respond /(?:che )?cos(?:\')?è (.+)/i, (res) ->
     mem = robot.brain.get('memoria') or {}
     if mem[res.match[1]]
