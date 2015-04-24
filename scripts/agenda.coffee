@@ -39,6 +39,7 @@ cosaCePerIl = (day,res) ->
       res.send "non c'è niente segnato sull'agenda per il "+day
     else
       res.send "ecco cosa c'è per doma: "+data.join('; ')
+
 module.exports = (robot) ->
   robot.respond /cosa c'è per domani?/i, (res) ->
     cosaCePerIl moment().add(1, 'days').format('YYYY-MM-DD'), res
