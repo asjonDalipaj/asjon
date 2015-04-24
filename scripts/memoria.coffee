@@ -6,6 +6,11 @@ module.exports = (robot) ->
     mem = robot.brain.get('memoria') or {}
     name = res.match[1].toLowerCase().replace('?',''); definition = res.match[3].replace('?','')
     r = if res.match[2] is 'sono' then 'fossero' else 'fosse'
+    # Evita il bug nel caso manca il soggeto ('ricorda che è/sono ...')
+    if name is 'che'
+      if res.match[2] is 'è' then return res.send 'ma COSA è '+definition
+      name = res.message.user.name.toLowerCase()
+      r = 'fosse'
     if mem[name]?
       res.send 'pensavo che '+name+' '+r+' '+mem[name]+'. Mi ricorderò che invece è '+definition
     else
