@@ -17,7 +17,7 @@ module.exports = (robot) ->
       delete mem[m]
       robot.brain.set 'memoria', mem # necessary?
     else res.send 'non so cosa sia'
-  robot.respond /(?:che )?((?:(?:(?:(?:cos|qual)\'è)|chi (?:sono|è)?))|(?:quali|cosa) sono) (.+)(?:\?)?/i, (res) ->
+  robot.respond /(?:che )?((?:(?:(?:(?:cos|qual)\'è)|chi (?:sono|è)?))|(?:quali|cosa) sono) ([\w ]+)(?:\?)?/i, (res) ->
     mem = robot.brain.get('memoria') or {}
     arg = (res.match[2] or res.match[1]).toLowerCase()
     verbo = res.match[1].toLowerCase().split(/[' ]/i)
