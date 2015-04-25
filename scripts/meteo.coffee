@@ -8,7 +8,7 @@
 #   None
 #
 # Commands:
-#   hubot 
+#   hubot che tempo fa/c'è (a crema)? - guarda il cielo e risponde con informazioni sul meteo di crema
 # 
 # Author:
 #   Enrico Fasoli (fazo96)
