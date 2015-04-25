@@ -45,8 +45,6 @@ module.exports = (robot) ->
       l.push a[i]+' volt'+(if a[i] is 1 then 'a' else 'e')+' '+i
     res.send 'mi hanno chiamato '+l.join(', ')
   # Altro
-  robot.hear /compiti/i, (res) ->
-    res.send 'ricordatevi che se mi chiamate chiedendo cosa c\'è per domani posso guardare io sull\'agenda!'
   robot.respond /saluta (.+)/i, (res) ->
     res.send 'ciao ' + res.match[1]
   robot.respond /spaca botilia/i, (res) ->
