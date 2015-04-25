@@ -57,6 +57,11 @@ module.exports = (robot) ->
     if query? then query = query.replace '?', ''
     # Estrazione argomento della query
     arg = (res.match[3] or res.match[2] or res.match[1]).toLowerCase().replace('?','')
+    # Se l'argomento è una richiesta di circolari skippo
+    console.log query, arg
+    if arg.match /^le (?:ultime )?(?:\d+ )?circolari(?:\?)?$/i
+      # non rispondo
+      return
     # Controllo se l'argomento è data
     argIsDate = arg.trim().match(/^(?:il )?\d{4}-\d{1,2}-\d{1,2}$/i) and moment(arg,'YYYY-MM-DD').isValid()
     if argIsDate and (query is 'quand' or query is 'cos')
