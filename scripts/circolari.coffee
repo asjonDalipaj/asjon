@@ -1,3 +1,19 @@
+# Description:
+#   si collega al sito della scuola e legge le circolari
+#
+# Dependencies:
+#   "cheerio": "0.19.0"
+# 
+# Configuration:
+#   None
+#
+# Commands:
+#   hubot circolari - stampa la lista delle ultime circolari
+#
+# Author:
+#   Enrico Fasoli (fazo96)
+#
+
 cheerio = require('cheerio')
 fs = require('fs')
 

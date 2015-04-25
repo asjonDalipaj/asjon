@@ -1,3 +1,26 @@
+# Description:
+#   piccole cose e easter egg di Asjon
+#
+# Dependencies:
+#   None
+#
+# Configuration:
+#   None
+#
+# Commands:
+#   grazie/bravo asjon - ringrazia asjon
+#   hubot ringraziamenti - chiedi ad asjon quante volte è stato ringraziato
+#   hubot sei ... - giudica asjon
+#   hubot come ti hanno chiamato? - chiedi ad asjon come è stato giudicato
+#   hubot saluta <utente> - saluta l'utente
+#   ciao asjon - saluta asjon
+#
+# Author:
+#   Enrico Fasoli (fazo96)
+#   Leonardo Magon
+#   Gabriele Della Torre
+#
+
 module.exports = (robot) ->
   # Ringraziamenti
   ringr = ['prego :)', "non c'è di che", "faccio solo il mio lavoro", "no problemo amigo", "non fate complimenti ;)"]
@@ -9,7 +32,7 @@ module.exports = (robot) ->
   robot.respond /ringraziamenti/i, (res) ->
     res.send 'voi teneroni mi avete ringraziato ' + (robot.brain.get('ringraziato') or 0) + ' volte :)'
   # Richiami
-  robot.respond /sei (?:(?:proprio|davvero|veramente) )?(.+)/i, (res) ->
+  robot.respond /sei (?:(?:proprio|davvero|veramente|molto|un|una) )?(.+)/i, (res) ->
     nomi = robot.brain.get('nomi') or {}
     nomi[res.match[1]] ?= 0
     nomi[res.match[1]] += 1

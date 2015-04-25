@@ -1,3 +1,22 @@
+# Description:
+#   si collega al registro elettronico e controlla l'agenda
+#
+# Dependencies:
+#   "cheerio": "0.19.0"
+#   "nightmare": "1.8.0"
+#   "moment":  "2.10.2"
+#
+# Configuration:
+#   REGISTRO_USERNAME - username per login al registro
+#   REGISTRO_PASSWORD - password per login al registro
+#
+# Commands:
+#   hubot cosa c'è per (domani|il (data))? - controlla agenda per la data richiesta
+#
+# Author:
+#   Enrico Fasoli (fazo96)
+#
+
 Nightmare = require 'nightmare'
 cheerio = require 'cheerio'
 moment = require 'moment'
@@ -33,6 +52,8 @@ downloadAgenda = (day, cb) ->
       cb tab
 
 cosaCePerIl = (day,res) ->
+  unless process.env.REGISTRO_USERNAME and process.env.REGISTRO_PASSWORD
+    return res.send 'non dispongo delle credenziali per il registro :('
   res.send 'aspetta che guardo l\'agenda per il '+day+' (potrei metterci fino a 3 minuti)'
   downloadAgenda day, (data) ->
     if data.length is 0

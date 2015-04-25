@@ -1,3 +1,21 @@
+# Description:
+#   permette di salvare e recuperare nozioni
+#
+# Dependencies:
+#   "moment": "2.10.2"
+#
+# Configuration:
+#   None
+#
+# Commands:
+#   hubot ricordati che ... è/sono ... - salva un ricordo
+#   hubot memoria/a cosa stai pensando? - stampa la lista delle nozioni
+#   hubot che cos'è/quand'è/quali sono/... ... - richiama un ricordo
+#
+# Author:
+#   Enrico Fasoli (fazo96)
+#
+
 moment = require 'moment'
 moment.locale 'it'
 
