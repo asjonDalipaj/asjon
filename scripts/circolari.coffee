@@ -8,7 +8,7 @@
 #   None
 #
 # Commands:
-#   hubot circolari - stampa la lista delle ultime circolari
+#   hubot mostrami le circolari - stampa la lista delle ultime circolari
 #
 # Author:
 #   Enrico Fasoli (fazo96)
@@ -48,8 +48,6 @@ parseHtml = (htmlData,done) ->
     return obj
   tab = tab.get()
   tab.splice 0, 1
-  # fs.writeFileSync('result.json',JSON.stringify(tab))  
-  # console.log("saved file")
   done null, tab
 
 downloadCircolari = (robot, callback) ->
@@ -60,8 +58,6 @@ downloadCircolari = (robot, callback) ->
 diffCircolari = (oldObj,newObj) ->
   diff = newObj.length - oldObj.length
   newObj.slice(0,diff)
-
-circolari = []
 
 parseCircolari = (err,data,callback) ->
   if err
@@ -74,20 +70,11 @@ parseCircolari = (err,data,callback) ->
       callback circolari
 
 module.exports = (robot) ->
-  robot.respond /circolari/i, (res) ->
-    res.send 'controllo circolari...'
-    fs.exists 'circolari/circolari.json', (jsonExists) ->
-      if jsonExists
-        circolari = JSON.parse fs.readFileSync('circolari.json').toString()
-        res.send JSON.stringify circolari.slice 0,5
-      else
-        fs.exists 'circolari.html', (htmlExists) ->
-          if htmlExists
-            fs.readFile 'circolari/circolari.html', (a,b) -> parseCircolari a, b, (x) -> res.send JSON.stringify x.slice 0, 5
-          else
-            res.send "download circolari..."
-            downloadCircolari robot, (a,b) ->
-              res.send 'finito download...'
-              parseCircolari a, b, (x) ->
-                res.send 'invio...'
-                res.send JSON.stringify x.slice 0, 5
+  robot.respond /(?:mostrami|dimmi|fammi vedere) (?:le(?:ultime)? )?circolari/i, (res) ->
+    res.send "download circolari..."
+    downloadCircolari robot, (a,b) ->
+      res.send 'finito download...'
+      parseCircolari a, b, (x) ->
+        list = x.slice 0, 10
+        list.forEach (c) ->
+          res.send [c.data,c.titolo,c.link].join(' | ')
