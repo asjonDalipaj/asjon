@@ -8,7 +8,8 @@
 #   None
 #
 # Commands:
-#   hubot mostrami le circolari - stampa la lista delle ultime circolari
+#   hubot mostrami le (ultime (n)) circolari - stampa la lista delle ultime circolari
+#   hubot linkami la circolare (numero/n/n°) (n) - linka una circolare precisa
 #
 # Author:
 #   Enrico Fasoli (fazo96)
@@ -65,7 +66,7 @@ parseCircolari = (err,data,callback) ->
     parseHtml data, (err,res) -> callback res
 
 module.exports = (robot) ->
-  robot.respond /(?:mostrami|dimmi|fammi vedere) (?:le(?: ultime)? )?([0-9]+ )?circolari/i, (res) ->
+  robot.respond /(?:mostrami|dimmi|fammi vedere|quali sono) (?:le(?: ultime)? )?([0-9]+ )?circolari/i, (res) ->
     if res.match[1] is 0 then return
     res.send "sto controllando le circolari..."
     num = 10
