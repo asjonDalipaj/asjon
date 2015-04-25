@@ -11,7 +11,7 @@ module.exports = (robot) ->
       console.log 'MALFORMED GITHUB API SECRET: was',
         req.headers["x-hub-signature"], 'but expected', "sha1="+process.env.GITHUB_API_SECRET
       return
-    dest = name: req.params.name, room: req.params.room
+    dest = name: req.params.name, room: req.params.room.replace(':','#')
     if req.body.ref is 'refs/heads/master'
       s = 'Sono stato aggiornato!\n'
       cm = req.body.commits.map (c) ->
