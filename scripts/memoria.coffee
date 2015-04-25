@@ -71,7 +71,9 @@ module.exports = (robot) ->
     else
       # chiesto qualcosa che non è una data
       mem = robot.brain.get('memoria') or {}
-      verbo = if query? then 'è' else 'sono'
+      verbo = if query is 'è' or query is 'sono' then query
+      if query is 'cos' or query is 'quand' then verbo = 'è'
+      if query is 'qual' then verbo = 'è' else if !query? then verbo = 'sono'
       if mem[arg]
         # controllo se è salvata una data nell'argomento chiesto
         data = moment(mem[arg],'[il] YYYY-MM-DD')
