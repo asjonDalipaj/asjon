@@ -15,7 +15,6 @@
 #
 
 cheerio = require('cheerio')
-fs = require('fs')
 
 parseHtml = (htmlData,done) ->
   $ = cheerio.load htmlData
@@ -63,18 +62,23 @@ parseCircolari = (err,data,callback) ->
   if err
     console.log(err)
   else
-    parseHtml data, (err,res) ->
-      #console.log("Done!")
-      circolari = res
-      fs.writeFile 'circolari.json', JSON.stringify circolari
-      callback circolari
+    parseHtml data, (err,res) -> callback res
 
 module.exports = (robot) ->
-  robot.respond /(?:mostrami|dimmi|fammi vedere) (?:le(?: ultime)? )?circolari/i, (res) ->
-    res.send "download circolari..."
+  robot.respond /(?:mostrami|dimmi|fammi vedere) (?:le(?: ultime)? )?([0-9]+ )?circolari/i, (res) ->
+    if res.match[1] is 0 then return
+    res.send "sto controllando le circolari..."
+    num = 10
+    if not isNaN(res.match[1])
+      num = parseInt res.match[1]
     downloadCircolari robot, (a,b) ->
-      res.send 'finito download...'
       parseCircolari a, b, (x) ->
-        list = x.slice 0, 10
-        list.forEach (c) ->
-          res.send [c.data,c.titolo,c.link].join(' | ')
+        list = x.slice 0, (num or 5)
+        msg = list.map (c) ->
+          ['('+c.protocollo.split('/')[0]+')','('+c.data+')',c.titolo].join(' ')
+        res.send msg.join ' | '
+
+  robot.respond /linkami (?:(?:la )?circolare )(?:(?:n(?:°)?(?: )?)|numero )?(\d+)/i, (res) ->
+    base = "http://galileicrema.it/Intraitis/documenti/comunicazioni/2014/Circolare"
+    res.send base+res.match[1]+'.pdf'
+
