@@ -17,6 +17,7 @@
 #
 # Author:
 #   Enrico Fasoli (fazo96)
+#   Ravinder Pal Singh
 #   Leonardo Magon
 #   Gabriele Della Torre
 #
@@ -56,10 +57,14 @@ module.exports = (robot) ->
     res.send 'gesùùùù!!!'
   robot.hear /lucca/i, (res) ->
     res.send 'a Lucca piacciono i Pony. gayyyyy!!'
-  robot.hear /singh/, (res) ->
+  robot.hear /singh/i, (res) ->
     res.send 'Singh, non sei più l\'indiano di una volta...'
   robot.hear /gae/i, (res) ->
     res.send 'il Gae viene dal Molise... che non esiste... ahahah'
+  robot.hear /magon/i, (res)->
+    res.send 'non si chiama Magon, si chiama Leo!'
+  robot.hear /dilda/i, (res)->
+    res.send 'oplààààà'
   robot.respond /dove sei/i, (res) ->
     robot.http('http://canihazip.com/s')
       .get() (err, r, body) ->
