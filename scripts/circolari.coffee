@@ -70,7 +70,7 @@ parseCircolari = (err,data,callback) ->
       callback circolari
 
 module.exports = (robot) ->
-  robot.respond /(?:mostrami|dimmi|fammi vedere) (?:le(?:ultime)? )?circolari/i, (res) ->
+  robot.respond /(?:mostrami|dimmi|fammi vedere) (?:le(?: ultime)? )?circolari/i, (res) ->
     res.send "download circolari..."
     downloadCircolari robot, (a,b) ->
       res.send 'finito download...'
