@@ -70,6 +70,7 @@ module.exports = (robot) ->
       .get() (err, r, body) ->
         res.send 'dovrei essere a ' + body
   robot.respond /con chi stai parlando/i, (res) ->
+    console.log res.message.user, res.message.room
     if res.message.user.name is res.message.room
       res.send 'sto parlando con te, '+res.message.user.name
     else
