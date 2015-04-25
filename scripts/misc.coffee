@@ -46,10 +46,20 @@ module.exports = (robot) ->
   # Altro
   robot.hear /compiti/i, (res) ->
     res.send 'ricordatevi che se mi chiamate chiedendo cosa c\'è per domani posso guardare io sull\'agenda!'
-  robot.respond /spaca botilia/i, (res) ->
-    res.send 'AMAZO FAMILIA'
   robot.respond /saluta (.+)/i, (res) ->
     res.send 'ciao ' + res.match[1]
+  robot.respond /spaca botilia/i, (res) ->
+    res.send 'AMAZO FAMILIA'
+  robot.hear /trogu/i, (res) ->
+    res.send 'comprate le prevendite da Trogu!!!'
+  robot.hear /sarte/i, (res) ->
+    res.send 'gesùùùù!!!'
+  robot.hear /lucca/i, (res) ->
+    res.send 'a Lucca piacciono i Pony. gayyyyy!!'
+  robot.hear /singh/, (res) ->
+    res.send 'Singh, non sei più l\'indiano di una volta...'
+  robot.hear /gae/i, (res) ->
+    res.send 'il Gae viene dal Molise... che non esiste... ahahah'
   robot.respond /dove sei/i, (res) ->
     robot.http('http://canihazip.com/s')
       .get() (err, r, body) ->
@@ -61,8 +71,10 @@ module.exports = (robot) ->
       res.send 'sto parlando in '+res.message.room+', '+res.message.user.name
   robot.respond /ti amo/i, (res) ->
     res.send 'anche io ti amo '+(res.message.user.name+' ' or '')+'<3'
-  robot.hear /(?:ehi|ciao|(?:bella(?: li)?)) (?:asjon|assa|assion(?:i|e))(?:!)?/i, (res) ->
+  robot.respond /ti odio/i, (res) ->
+    res.send 'ma cosa ho fatto di male '+(res.message.user.name or '')+'? :('
+  robot.hear /(?:ehi|ciao|(?:bella(?: li)?)) (?:asjon|assa|assion|assioni(?:i|e))(?:!)?/i, (res) ->
     console.log res.match
-    saluti = ['ciao', 'bella', 'è arrivato', 'eccolooo', 'dimmi']
+    saluti = ['ciao', 'bella', 'è arrivato', 'eccolooo', 'dimmi', 'weeee', 'ehilà']
     res.send res.random(saluti)+' '+res.message.user.name+'!'
   robot.respond /secret-kill-code/i, (res) -> process.exit 0
