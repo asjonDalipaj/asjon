@@ -12,7 +12,7 @@ module.exports = (robot) ->
         req.headers["x-hub-signature"], 'but expected', "sha1="+process.env.GITHUB_API_SECRET
       return
     dest = name: req.params.name, room: req.params.room
-    if req.body.ref is 'refs/head/master'
+    if req.body.ref is 'refs/heads/master'
       s = 'Sono stato aggiornato!\n'
       cm = req.body.commits.map (c) ->
         [c.committer.username,c.message].join ' -> '
