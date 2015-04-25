@@ -79,7 +79,7 @@ module.exports = (robot) ->
           ['('+c.protocollo.split('/')[0]+')','('+c.data+')',c.titolo].join(' ')
         res.send msg.join ' | '
 
-  robot.respond /linkami (?:(?:la )?circolare )(?:(?:n(?:°)?(?: )?)|numero )?(\d+)/i, (res) ->
+  robot.respond /linkami (?:la )?circolare (?:(?:n(?:°)?(?: )?)|numero )?(\d+)/i, (res) ->
     base = "http://galileicrema.it/Intraitis/documenti/comunicazioni/2014/Circolare"
     res.send base+res.match[1]+'.pdf'
 

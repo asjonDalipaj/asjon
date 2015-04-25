@@ -45,3 +45,8 @@ module.exports = (robot) ->
         if labels is '' then labels = 'nessuno'
         ["#"+i.number,i.title,"By: "+i.user.login,'Tags: '+labels].join(' | ')
       res.send r.join '\n'
+
+  robot.respond /linkami (?:la )?issue (?:(?:n(?:°)?(?: )?)|numero )?(\d+)/i, (res) ->
+    base = 'http://github.com/fazo96/asjon/issues/'
+    res.send base+res.match[1]
+

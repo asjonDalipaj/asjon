@@ -101,7 +101,7 @@ module.exports = (robot) ->
   robot.respond /(?:guarda l')?agenda (?:per il )?(\d+-\d+-\d+)/i, (res) ->
     cosaCePerIl res.match[1], res
   robot.respond /(?:che )?compiti(?: ci sono)?(?:\?)?/i, (res) ->
-    res.send 'controllo compiti...'
+    res.send 'controllo compiti... (potrei metterci fino a 3 minuti)'
     getCompiti (compiti) ->
       # tengo solo quelli per il futuro
       compiti = compiti.filter (c) ->
